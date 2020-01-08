@@ -8,6 +8,60 @@ public class Main {
         task1();
         System.out.println("Task 2:");
         task2();
+        System.out.println("Task 3:");
+        task3();
+        System.out.println("Task 4:");
+        task4();
+    }
+
+    private static void task4() {
+        Scanner input = new Scanner(System.in);
+        String filePath;
+        int day,
+                year,
+                month;
+
+        System.out.print("Podaj ścieżkę do czytaneto pliku: ");
+        filePath = input.nextLine();
+
+        try (DataInputStream inputStream = new DataInputStream(new FileInputStream(filePath))) {
+            year = inputStream.readInt();
+            month = inputStream.readInt();
+            day = inputStream.readInt();
+
+            System.out.println(String.format("Urodzony: %d-%d-%d", day, month, year));
+        } catch (NoSuchFileException e) {
+            System.out.println("Niepoprawna scieżka!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void task3() {
+        Scanner input = new Scanner(System.in);
+        String filePath;
+        int day,
+                month,
+                year;
+
+        System.out.print("Podaj ścieżkę do pliku: ");
+        filePath = input.nextLine();
+        try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(filePath))) {
+            System.out.print("Podaj rok urodzenia: ");
+            year = input.nextInt();
+            System.out.print("Podaj miesiąc urodzenia: ");
+            month = input.nextInt();
+            System.out.print("Podaj dzień urodzenia: ");
+            day = input.nextInt();
+
+            outputStream.writeInt(year);
+            outputStream.writeInt(month);
+            outputStream.writeInt(day);
+        } catch (FileNotFoundException e) {
+            System.out.println("Niepoprawna scieżka!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void task2() {
